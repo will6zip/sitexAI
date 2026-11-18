@@ -1,0 +1,143 @@
+<!-- STYLE.CSS -->
+<div id="sitex-ai-container" style="font-family: 'Courier New', Courier, monospace; max-width: 500px; margin: 20px auto; padding: 25px; border: 2px solid #00f3ff; border-radius: 12px; background: #0b0c10; color: #c5c6c7; box-shadow: 0 0 15px rgba(0, 243, 255, 0.25);">
+  
+  <!-- Header with Futuristic Glow -->
+  <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border-bottom: 1px solid #1f2833; padding-bottom: 15px;">
+    <h1 style="font-size: 24px; font-weight: 900; color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); margin: 0; letter-spacing: 2px;">SITEX AI</h1>
+  </div>
+  
+  <!-- Chat History Window -->
+  <div id="sitex-chat-box" style="height: 320px; overflow-y: auto; border: 1px solid #1f2833; padding: 15px; margin-bottom: 20px; border-radius: 6px; background: #1f2833; font-size: 14px; line-height: 1.5; color: #66fcf1;">
+    <div style="color: #45f3ff; opacity: 0.6; font-style: italic; text-align: center; margin-top: 130px; letter-spacing: 1px;">SYSTEM READY. ENTER COMMAND QUERY...</div>
+  </div>
+
+  <!-- User Input Form -->
+  <form id="sitex-ai-form" style="display: flex; gap: 10px;">
+    <input type="text" id="sitex-user-input" placeholder="Ask Sitex AI anything..." required style="flex: 1; padding: 12px; border: 1px solid #45f3ff; border-radius: 6px; font-size: 14px; background: #0b0c10; color: #00f3ff; font-family: inherit; outline: none; box-shadow: inset 0 0 5px rgba(0, 243, 255, 0.2);">
+    <button type="submit" style="padding: 12px 24px; background: #00f3ff; color: #0b0c10; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-family: inherit; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s ease; box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);" onmouseover="this.style.background='#66fcf1'; this.style.boxShadow='0 0 15px #66fcf1'" onmouseout="this.style.background='#00f3ff'; this.style.boxShadow='0 0 10px rgba(0, 243, 255, 0.4)'">Send</button>
+  </form>
+  
+  <!-- Footer Branding -->
+  <div style="text-align: center; font-size: 10px; color: #45f3ff; opacity: 0.5; margin-top: 15px; letter-spacing: 2px; text-transform: uppercase;">
+    BY MODULUS STUDIOS
+  </div>
+</div>
+
+<script>
+  function runSandboxBrain(inputText) {
+    const query = inputText.toLowerCase().trim();
+    
+    // 1. Core Conversational Mappings
+    if (query === 'hi' || query === 'hello' || query === 'hey' || query === 'yo') {
+      return "Hello! I am Sitex AI, running locally on your device. Ask me any math equation, soccer move, dirt bike tutorial, or coding structure question!";
+    }
+    if (query.includes('how are you')) {
+      return "I'm performing optimally! Processing calculations completely offline to avoid network constraints.";
+    }
+    if (query.includes('thank') || query.includes('it works')) {
+      return "Excellent! I'm glad your chat panel and form inputs are tracking successfully.";
+    }
+    if (query.includes('api key') || query.includes('have the key')) {
+      return "Since your school firewall blocks remote AI connections, I am running completely offline right now without any API keys!";
+    }
+
+    // 2. PRIORITY: Math & Calculation Router
+    let mathExtract = query.replace(/\bpi\b/g, Math.PI);
+    mathExtract = mathExtract
+      .replace(/what's/g, '')
+      .replace(/what is/g, '')
+      .replace(/how much is/g, '')
+      .replace(/calculate/g, '')
+      .replace(/[a-z?]/g, '')
+      .trim();
+    
+    const safeMathPattern = /^[0-9+\-*/().\s]+$/;
+    
+    if (mathExtract && safeMathPattern.test(mathExtract)) {
+      try {
+        const solution = Function(`"use strict"; return (${mathExtract})`)();
+        if (solution !== undefined && !isNaN(solution)) {
+          const displayFormula = query.replace(/what's/g, '').replace(/what is/g, '').replace(/\?/g, '').trim();
+          return `<b>Math Calculation:</b><br>${displayFormula} = <b>${solution}</b>`;
+        }
+      } catch (e) {}
+    }
+
+    if (/\bpi\b/.test(query)) {
+      return `<b>Pi (π):</b> The value of Pi is approximately <b>${Math.PI}</b>. It represents the ratio of a circle's circumference to its diameter!`;
+    }
+
+    // 3. Soccer & Sport Skills Memory
+    if (query.includes('cruyff turn') || query.includes('cruyff')) {
+      return "<b>How to do a Cruyff Turn:</b><br>1. Shape your body like you're about to make a long cross or shot.<br>2. Plant your non-kicking foot slightly ahead of the ball.<br>3. Drag the ball backward behind your standing leg with the inside of your kicking foot.<br>4. Whirl your torso 180 degrees around and burst forward into space!";
+    }
+    if (query.includes('stepover') || query.includes('scissors')) {
+      return "<b>How to do a Stepover:</b> Swing your foot over the ball from the inside out to fool the defender, then accelerate the opposite direction using the outside of your trailing foot.";
+    }
+
+    // 4. Dirt Bike Tutorials Component
+    if (query.includes('wheelie')) {
+      return "<b>How to Wheelie a Dirt Bike:</b><br>1. Shift into 1st or 2nd gear and ride at a walking pace.<br>2. Slide your body weight slightly back toward the rear seat.<br>3. Pull the clutch lever in with one or two fingers, and blip the throttle.<br>4. Drop (pop) the clutch smoothly while pulling back lightly on the handlebars.<br>5. Keep your right foot over the rear brake pedal to push down instantly if you lean back too far!";
+    }
+    if (query.includes('shift') || query.includes('clutch') || query.includes('gear')) {
+      return "<b>How to Shift Gears (With Clutch):</b><br>1. Roll off the throttle completely.<br>2. Pull the clutch lever all the way into the handlebar grip.<br>3. Clicking down on the foot lever puts you into 1st gear. Clicking upward moves you into 2nd, 3rd, 4th, and 5th gears.<br>4. Smoothly release the clutch while simultaneously rolling back onto the throttle.";
+    }
+    if (query.includes('berm') || query.includes('corner') || query.includes('turn')) {
+      return "<b>How to Corner in a Berm:</b><br>1. Carry your momentum deep into the turn before breaking.<br>2. Slide your body forward onto the gas tank to weigh down the front tire for traction.<br>3. Extend your inside leg straight forward past the shroud to catch the bike if it slips.<br>4. Lean the dirt bike over deep into the dirt bank while keeping your body vertical over the top edge.";
+    }
+if (query.includes('start riding') || query.includes('beginner') || query.includes('how to ride')) {
+      return "<b><b>How to Ride a Dirt Bike:</b><br>1. Put on all protective gear (helmet, boots, gloves).<br>2. Turn on the fuel valve, switch the bike to run, and start the engine.<br>3. Pull the clutch in fully and click down on the foot peg to reach 1st gear.<br>4. Gently twist the throttle while slowly letting out the clutch lever to roll forward.<br>5. To stop, let go of the throttle, pull in the clutch, and smoothly squeeze the front brake handle while pushing down the rear foot brake.";
+    }
+    // 5. Web Component Structures
+    if (query.includes('html')) {
+      return "HTML establishes the visual layouts. For instance, this chat module utilizes form actions and div wrappers to draw bubble boundaries.";
+    }
+    if (query.includes('css')) {
+      return "CSS handles design configurations! It centers your text panel, shapes the rounded chat headers, and sets up element sizing guidelines.";
+    }
+    if (query.includes('javascript') || query.includes('js')) {
+      return "JavaScript controls script updates. It listens for form submissions, runs calculations locally, and updates text blocks instantly.";
+    }
+
+    // 6. Dynamic Fallback Simulator
+    const actions = ["analyzing your input", "evaluating your query structure", "checking my sandbox components"];
+    const topics = ["HTML skeleton trees", "CSS display wrappers", "Dirt bike techniques", "localized sandbox parameters"];
+    const tips = ["Try typing a math equation like 'what is pi * 2' or '100 / 4'!", "Type 'how to wheelie' or 'how to shift gears' to check dirt bike instructions!"];
+    
+    const seed = query.length + query.charCodeAt(0 || 0);
+    const action = actions[seed % actions.length];
+    const topic = topics[(seed + 1) % topics.length];
+    const tip = tips[(seed + 2) % tips.length];
+
+    return `Offline Sandbox Engine Active! I am currently ${action} regarding unspecified keywords. ${tip}`;
+  }
+
+  document.getElementById('sitex-ai-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const inputElement = document.getElementById('sitex-user-input');
+    const chatBox = document.getElementById('sitex-chat-box');
+    const userMessage = inputElement.value.trim();
+    
+    if (!userMessage) return;
+
+    if (chatBox.innerHTML.includes('COMMAND QUERY') || chatBox.innerHTML.includes('ready')) {
+      chatBox.innerHTML = '';
+    }
+
+    // FIXED: Removed "[USER]:" label from text display layout string block injection
+    chatBox.innerHTML += `<div style="margin-bottom: 12px; text-align: right;"><span style="background: #00f3ff; color: #0b0c10; padding: 8px 12px; border-radius: 12px 12px 0px 12px; display: inline-block; max-width: 80%; text-align: left; font-weight: bold; box-shadow: 0 0 5px rgba(0,243,255,0.3);">${userMessage}</span></div>`;
+    inputElement.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    const aiResponseId = 'ai-res-' + Date.now();
+    chatBox.innerHTML += `<div style="margin-bottom: 12px; text-align: left;"><span id="${aiResponseId}" style="background: #0b0c10; color: #45f3ff; border: 1px solid #1f2833; padding: 8px 12px; border-radius: 12px 12px 12px 0px; display: inline-block; max-width: 80%;"><i>COMPUTING...</i></span></div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    setTimeout(() => {
+      const responseText = runSandboxBrain(userMessage);
+      document.getElementById(aiResponseId).innerHTML = `<b style="color: #00f3ff;">[SITEX AI]:</b><br>${responseText}`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 300);
+  });
+</script>
